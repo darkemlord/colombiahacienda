@@ -7,9 +7,12 @@ import { Redirect } from '@shopify/app-bridge/actions';
 import { Context } from '@shopify/app-bridge-react';
 
 export const ResourceListWithProducts = () => {
+  console.log(store)
   return (
     <div>
-
+      <h1>hola hermosos</h1>
     </div>
   )
 }
+
+export default ResourceListWithProducts;

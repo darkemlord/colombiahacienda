@@ -1,7 +1,8 @@
 import { EmptyState, Layout, Page } from "@shopify/polaris";
 import React, { useState } from 'react';
 import { ResourcePicker, TitleBar } from "@shopify/app-bridge-react";
-
+import store from 'store-js';
+import ResourceListWithProducts from "./components/ResourceListWithProducts";
 const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
 // the version of react that works with functions is used, changes have been made to the original syntax to make it work.
@@ -43,6 +44,7 @@ const Index = () => {
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, temporibus.</p>
       </EmptyState>
     </Layout>
+    <ResourceListWithProducts />
   </Page>
 );
 }
