@@ -1,4 +1,4 @@
-import { EmptyState, Heading, Layout, Page } from "@shopify/polaris";
+import { EmptyState, Layout, Page } from "@shopify/polaris";
 
 const Index = () => (
   <Page>
@@ -6,7 +6,7 @@ const Index = () => (
       <EmptyState // This is an empty state, it is used to create new components through polaris
         heading='Manage Your Inventory Transfers'
         action={{content: 'add transfer',
-        onAction: () => this.setState({open:true})
+        onAction: () => console.log('hello ema')
         }}
       >
       </EmptyState>
