@@ -6,7 +6,7 @@ const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
 // the version of react that works with functions is used, changes have been made to the original syntax to make it work.
 const Index = () => {
-  const [open, setOpen] = useState(false) //handle the image src
+  const [open, setOpen] = useState(false) //handle the products window
   const handleSelection = (resources) => {
     setOpen(false);
     console.log(resources)
@@ -22,7 +22,7 @@ const Index = () => {
           }
         }}
       />
-      <ResourcePicker
+      <ResourcePicker // Here is the functionality of the products window picker
         resourceType='Product'
         showVariants={false}
         open={open}
