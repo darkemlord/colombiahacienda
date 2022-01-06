@@ -33,7 +33,7 @@ const Index = () => {
       />
       <EmptyState // This is an empty state, it is used to create new components through polaris
         heading='Manage Your Inventory Transfers'
-        action={{content: 'Handle image',
+        action={{content: 'Select Products',
         onAction: () => {
           setOpen(true)
         }
