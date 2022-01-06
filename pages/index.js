@@ -35,7 +35,7 @@ const Index = () => {
         heading='Manage Your Inventory Transfers'
         action={{content: 'Handle image',
         onAction: () => {
-          console.log('hello world')
+          setOpen(true)
         }
       }}
         image={img}
