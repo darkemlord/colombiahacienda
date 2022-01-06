@@ -12,7 +12,7 @@ const Index = () => {
     <Layout>
       <EmptyState // This is an empty state, it is used to create new components through polaris
         heading='Manage Your Inventory Transfers'
-        action={{content: 'add transfer',
+        action={{content: 'Handle image',
         onAction: () => {
           if(button === false){
             setImage(imgTwo);
