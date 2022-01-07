@@ -1,53 +1,56 @@
-import { EmptyState, Layout, Page } from "@shopify/polaris";
-import React, { useState } from 'react';
-import { ResourcePicker, TitleBar } from "@shopify/app-bridge-react";
+import React from 'react';
+import { Page, Layout, EmptyState} from "@shopify/polaris";
+import { ResourcePicker, TitleBar } from '@shopify/app-bridge-react';
 import store from 'store-js';
-import ResourceListWithProducts from "./components/ResourceListWithProducts";
+import ResourceListWithProducts from './components/ResourceListWithProducts';
+
 const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
-// the version of react that works with functions is used, changes have been made to the original syntax to make it work.
-const Index = () => {
-  const [open, setOpen] = useState(false) //handle the products window
-  const handleSelection = (resources) => {
-    setOpen(false);
-    console.log(resources)
+class Index extends React.Component {
+  state = { open: false };
+  render() {
+    // A constant to define the app's empty state
+    const emptyState = !store.get('ids');
+    return (
+      <Page>
+        <TitleBar
+          primaryAction={{
+            content: 'Select products',
+            onAction: () => this.setState({ open: true }),
+          }}
+        />
+        <ResourcePicker
+          resourceType="Product"
+          showVariants={false}
+          open={this.state.open}
+          onSelection={(resources) => this.handleSelection(resources)}
+          onCancel={() => this.setState({ open: false })}
+        />
+        {emptyState ? ( // Controls the layout of your app's empty state
+          <Layout>
+            <EmptyState
+              heading="Discount your products temporarily"
+              action={{
+                content: 'Select products',
+                onAction: () => this.setState({ open: true }),
+              }}
+              image={img}
+            >
+              <p>Select products to change their price temporarily.</p>
+            </EmptyState>
+          </Layout>
+        ) : (
+          // Uses the new resource list that retrieves products by IDs
+          <ResourceListWithProducts />
+        )}
+      </Page>
+    );
   }
-  return (
-    <Page>
-    <Layout>
-      <TitleBar
-        primaryAction={{
-          content: 'Select Products',
-          onAction: () => {
-            setOpen(true);
-          }
-        }}
-      />
-      <ResourcePicker // Here is the functionality of the products window picker
-        resourceType='Product'
-        showVariants={false}
-        open={open}
-        onSelection={(resources) => {
-          handleSelection(resources)
-        }}
-        onCancel={() => setOpen(false)}
-      />
-      <EmptyState // This is an empty state, it is used to create new components through polaris
-        heading='Manage Your Inventory Transfers'
-        action={{content: 'Select Products',
-        onAction: () => {
-          setOpen(true)
-        }
-      }}
-        image={img}
-      >
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, temporibus.</p>
-      </EmptyState>
-    </Layout>
-    <ResourceListWithProducts />
-  </Page>
-);
+  handleSelection = (resources) => {
+    const idsFromResources = resources.selection.map((product) => product.id);
+    this.setState({ open: false });
+    store.set('ids', idsFromResources);
+  };
 }
-
 
 export default Index;
